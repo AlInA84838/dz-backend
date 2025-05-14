@@ -12,8 +12,13 @@ func main() {
 
 	for {
 
-		if from != "e" && from != "r" && from != "u" {
-			fmt.Println("Валюта введена неправильно!")
+		if from == "q" {
+			fmt.Println("Выход из программы.")
+			return
+		} else if from != "e" && from != "r" && from != "u" {
+			fmt.Println("Валюта введена неправильно! Повторите ввод.")
+			fmt.Scan(&from)
+			continue
 		} else {
 			result := inputValue()
 			if from == "u" {
@@ -70,9 +75,9 @@ func converter(from, to string, amount float64) float64 {
 	case from == "e" && to == "r":
 		result = amount * UandErate * RandUrate
 	case from == "r" && to == "e":
-		result = amount * RandUrate * UandErate
+		result = amount / RandUrate / UandErate
 	case from == "r" && to == "u":
-		result = amount * RandUrate
+		result = amount / RandUrate
 	default:
 		fmt.Println("Ошибка: неверный ввод валют")
 		return 0
